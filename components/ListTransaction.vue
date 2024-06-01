@@ -42,12 +42,12 @@
                         </template>
                         <NuxtLink :to="'/audiobooks/' + handleSlug(product.name)"
                             class="rounded-md  w-48 h-48 overflow-hidden shadow card_box">
-                            <NuxtImg :src="product.image" class="w-full h-full object-cover" :alt="product.name" format="webp" placeholder preload loading="lazy" />
+                            <img :src="product.image" class="w-full h-full object-cover" :alt="product.name" />
                         </NuxtLink>
                     </a-tooltip>
                     <NuxtLink :to="'/audiobooks/' + handleSlug(product.name)"
                         class="rounded-md w-40 h-40 lg:w-48 lg:h-48 overflow-hidden shadow block lg:hidden card_box">
-                        <NuxtImg :src="product.image" class="w-full h-full object-cover" :alt="product.name" format="webp" placeholder preload loading="lazy" />
+                        <img :src="product.image" class="w-full h-full object-cover" :alt="product.name" />
                     </NuxtLink>
                     <Button :disabled="isLoad[product.audio_object_key]"
                         @click.prevent="toggleAudio(product.audio_object_key)"

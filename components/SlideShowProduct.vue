@@ -20,7 +20,14 @@
                             <div class="text-sm text-left font-normal my-2">
                                 <span class="text-sub">Narrated by: </span>
                                 <span class="text-main border-b-[1px] border-orange-500">{{ product.narrated_by
-                                        }}</span>
+                                    }}</span>
+                            </div>
+                            <div v-if="product.series && product.series_number"
+                                class="text-sm text-left font-normal my-2">
+                                <span class="text-sub">Series: </span>
+                                <span class="text-main border-b-[1px] border-orange-500">
+                                    {{ product.series }}, {{ product.series_number }}
+                                </span>
                             </div>
                             <div class="text-sm text-left font-normal my-2 text-black">
                                 <span class="text-sub">Length:</span> {{ product.length }}
@@ -33,8 +40,8 @@
                             </div>
                             <div class="text-sm text-left font-normal my-2">
                                 <span class="text-sub">Publisher: </span>
-                                    <span class="text-main border-b-[1px] border-orange-500">{{ product.publisher
-                                        }}</span>
+                                <span class="text-main border-b-[1px] border-orange-500">{{ product.publisher
+                                    }}</span>
                             </div>
                             <div class="text-sm text-left font-normal my-2 text-black">
                                 <span class="text-sub">Description:</span>
@@ -45,7 +52,7 @@
                     <div class="overflow-hidden">
                         <NuxtLink :to="'/audiobooks/' + handleSlug(product.name)"
                             class="w-48 h-48 shadow card_box_slide" :style="promotionStyle(product)">
-                            <NuxtImg :src="product.image" class="rounded-md w-full h-full object-cover"
+                            <img :src="product.image" class="rounded-md w-full h-full object-cover"
                                 :alt="product.name" />
                         </NuxtLink>
                     </div>
@@ -64,7 +71,7 @@
                 <div class="overflow-hidden rounded-md shadow">
                     <NuxtLink :to="'/audiobooks/' + handleSlug(product.name)" class="block lg:hidden card_box"
                         :style="promotionStyle(product)">
-                        <NuxtImg :src="product.image" class="w-full h-full object-cover" :alt="product.name" />
+                        <img :src="product.image" class="w-full h-full object-cover" :alt="product.name" />
                     </NuxtLink>
                 </div>
                 <div class="my-2 block lg:hidden">

@@ -6,7 +6,7 @@
                     <div class="col-span-12 border-r-[1px] border-black lg:col-span-2">
                         <div
                             class="flex items-center justify-between gap-6 border-b-[1px] border-black py-6 lg:block md:space-y-6 lg:border-none lg:py-0">
-                            <NuxtImg class="h-10 md:h-14" src="/logo.png" alt="logo" format="webp" placeholder preload loading="lazy" />
+                            <img class="h-10 md:h-14" :src="logo" alt="logo" />
                         </div>
                     </div>
                     <div class="col-span-12 lg:col-span-10 mt-5 lg:mt-0">
@@ -68,7 +68,13 @@
 </template>
 
 <script>
+import logo from '@/assets/image/logo.png';
 export default {
+    data() {
+        return {
+            logo: logo,
+        }
+    },
     setup() {
         const categories = ref([]);
         const aboutUs = ref(null);

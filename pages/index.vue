@@ -67,58 +67,43 @@ export default {
       return item.data;
     },
     async handleApi() {
-      const cachedHero = this.loadFromLocalStorage('hero');
-      const cachedCategories = this.loadFromLocalStorage('categories');
-      const cachedProducts = this.loadFromLocalStorage('products');
+      const { csrf } = useCsrf();
+      const csrfToken = csrf;
+      if (csrfToken) {
+        try {
+          const [heroResponse, productResponse] = await Promise.all([
+            $fetch('/api/hero', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Csrf-Token': csrfToken
+              }
+            }),
+            $fetch('/api/product/home', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Csrf-Token': csrfToken
+              }
+            })
+          ]);
 
-      if (cachedHero) this.hero = cachedHero;
-      if (cachedCategories) this.categories = cachedCategories;
-      if (cachedProducts) this.products = cachedProducts;
-
-      if (!cachedHero || !cachedCategories || !cachedProducts) {
-        const { csrf } = useCsrf();
-        const csrfToken = csrf;
-        if (csrfToken) {
-          try {
-            const [heroResponse, productResponse] = await Promise.all([
-              $fetch('/api/hero', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Csrf-Token': csrfToken
-                }
-              }),
-              $fetch('/api/product/home', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Csrf-Token': csrfToken
-                }
-              })
-            ]);
-
-            if (heroResponse.data) {
-              this.hero = heroResponse.data.data;
-              this.saveToLocalStorage('hero', this.hero);
-            }
-
-            if (productResponse.data) {
-              this.categories = productResponse.data.data.category;
-              this.products = productResponse.data.data.product;
-              this.saveToLocalStorage('categories', this.categories);
-              this.saveToLocalStorage('products', this.products);
-            }
-
-            this.isData = true;
-
-          } catch (error) {
-            console.error('Error fetching data:', error);
+          if (heroResponse.data) {
+            this.hero = heroResponse.data.data;
           }
-        } else {
-          console.error('CSRF token not available');
+
+          if (productResponse.data) {
+            this.categories = productResponse.data.data.category;
+            this.products = productResponse.data.data.product;
+          }
+          
+          this.isData = true;
+
+        } catch (error) {
+          console.error('Error fetching data:', error);
         }
       } else {
-        this.isData = true;
+        console.error('CSRF token not available');
       }
     }
   }

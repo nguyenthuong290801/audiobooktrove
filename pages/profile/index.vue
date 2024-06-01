@@ -10,7 +10,8 @@
                 <div class="basis-full lg:basis-4/12">
                     <div class="bg-black rounded-md shadow p-2 relative mt-9">
                         <div class="h-20 w-20 absolute left-4 -top-10">
-                            <NuxtImg class="w-full h-full rounded-full p-2 bg-black duration-200" :src="avatar" />
+                            <img class="w-full h-full rounded-full p-2 bg-black duration-200" :src="avatar"
+                                alt="avatar" />
                         </div>
                         <div class="flex gap-1 items-center justify-start mt-8">
                             <div class="text-sm lg:text-base text-slate-400">Account:</div>
@@ -44,7 +45,7 @@
                                 :key="transaction.id">
                                 <NuxtLink :to="'/audiobooks/' + handleSlug(transaction.name)"
                                     class="rounded-md w-40 h-40 overflow-hidden shadow">
-                                    <NuxtImg :src="transaction.image" class="w-full h-full object-cover"
+                                    <img :src="transaction.image" class="w-full h-full object-cover"
                                         :alt="transaction.name" />
                                 </NuxtLink>
                                 <div class="">
@@ -96,7 +97,7 @@
                     :draggable="false">
                     <template #header>
                         <NuxtLink to="/">
-                            <NuxtImg class="h-12" :src="logoSrc" />
+                            <img class="h-12" :src="logo" alt="logo" />
                         </NuxtLink>
                     </template>
                     <div v-if="isPendingDownload" class="flex gap-1 items-center justify-center">
@@ -148,7 +149,7 @@
                     :draggable="false">
                     <template #header>
                         <NuxtLink to="/">
-                            <NuxtImg class="h-12" :src="logoSrc" />
+                            <img class="h-12" :src="logo" alt="logo" />
                         </NuxtLink>
                     </template>
                     <div class="text-base font-semibold border-b-[1px] mb-4">
@@ -172,10 +173,10 @@
                             :placeholder="'Tell us about your experience with the book ' + nameBook" />
                     </div>
                     <div class="">
-                        <a-alert v-if="isSuccess" class="select-none mb-4" message="Submit in successfully" type="success"
-                            show-icon />
-                        <a-alert v-if="isFailed" class="select-none mb-4"
-                            message="Submit failed (Fields are empty)" type="error" show-icon />
+                        <a-alert v-if="isSuccess" class="select-none mb-4" message="Submit in successfully"
+                            type="success" show-icon />
+                        <a-alert v-if="isFailed" class="select-none mb-4" message="Submit failed (Fields are empty)"
+                            type="error" show-icon />
                     </div>
                     <div class="flex justify-end mt-1">
                         <Button :disabled="isPendingSubmit" class="button_hero" @click="handleCreateReview()">
@@ -192,7 +193,8 @@
 </template>
 <script>
 import { getUserProfiles, logOutUser } from '@/composables/useSupabase';
-
+import logo from '@/assets/image/logo.png';
+import avatar from '@/assets/image/avatar.jpg';
 export default {
     setup() {
         definePageMeta({
@@ -227,21 +229,15 @@ export default {
             urls: [],
             downloadProgress: null,
             downloadingFileName: null,
-            idProduct: ''
+            idProduct: '',
+            logo: logo,
+            avatar: avatar
         }
     },
     mounted() {
         this.handleApiProfile();
         this.handleTransaction();
         this.handleCountTransaction();
-    },
-    computed: {
-        avatar() {
-            return '/avatar.jpg';
-        },
-        logoSrc() {
-            return '/logo.png';
-        }
     },
     watch: {
         page(newValue, oldValue) {

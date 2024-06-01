@@ -3,7 +3,7 @@
         <div class="max-w-6xl px-2 lg:px-0 mx-auto py-3 flex justify-between items-center">
             <div class="flex-shrink-0">
                 <NuxtLink to="/">
-                    <NuxtImg class="h-10 md:h-14" :src="logoSrc" alt="logo" format="webp" placeholder preload loading="lazy" />
+                    <img class="h-10 md:h-14" :src="logo" alt="logo" />
                 </NuxtLink>
             </div>
             <nav class="hidden lg:block">
@@ -52,14 +52,17 @@
                         <li class="ml-0 relative inline-block basis-1/4 lg:basis-1/3 rounded-full">
                             <NuxtLink to="/login">
                                 <Button class="p-1 rounded-full shadow-md w-10 h-10 justify-center"
-                                    :class="{ 'bg-black hover:bg-orange-600': isLogin, 'bg-sub': !isLogin }" aria-label="button login">
+                                    :class="{ 'bg-black hover:bg-orange-600': isLogin, 'bg-sub': !isLogin }"
+                                    aria-label="button login">
                                     <icons-user v-if="!isLogin" class="text-2xl" />
-                                    <NuxtImg v-if="isLogin" class="w-full h-auto object-cover rounded-full" :src="avatar" alt="avatar" format="webp" placeholder preload loading="lazy" />
+                                    <img v-if="isLogin" class="w-full h-auto object-cover rounded-full"
+                                        :src="avatar" alt="avatar"/>
                                 </Button>
                             </NuxtLink>
                         </li>
                         <li class="ml-0 relative inline-block basis-1/4 lg:hidden rounded-full">
-                            <Button class="bg-sub p-2 rounded-full shadow w-10 h-10" @click="visibleRight = true" aria-label="button menu">
+                            <Button class="bg-sub p-2 rounded-full shadow w-10 h-10" @click="visibleRight = true"
+                                aria-label="button menu">
                                 <icons-menu class="text-2xl" />
                             </Button>
                         </li>
@@ -69,7 +72,7 @@
             <Sidebar v-model:visible="visibleRight" position="right">
                 <template #header>
                     <NuxtLink to="/">
-                        <NuxtImg class="h-12 md:h-16" :src="logoSrc" alt="logo" format="webp" placeholder preload loading="lazy" />
+                        <img class="h-12 md:h-16" :src="logo" alt="logo" />
                     </NuxtLink>
                 </template>
                 <nav>
@@ -103,6 +106,8 @@
 </template>
 
 <script>
+import logo from '@/assets/image/logo.png';
+import avatar from '@/assets/image/avatar.jpg';
 export default {
     data() {
         return {
@@ -110,17 +115,12 @@ export default {
                 { title: 'Home', url: '/' },
                 { title: 'Audiobooks', url: '/audiobooks' },
             ],
-            isLogo: false,
-            visibleRight: false,
+            visibleRight: false, 
+            logo: logo,
+            avatar: avatar
         };
     },
     computed: {
-        logoSrc() {
-            return this.isLogo ? '/logo_white.png' : '/logo.png';
-        },
-        avatar() {
-            return '/avatar.jpg';
-        },
         countCart() {
             const cartCookie = useCookie('cart');
             if (cartCookie.value && cartCookie.value.length != 0) {

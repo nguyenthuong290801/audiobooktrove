@@ -4,7 +4,7 @@
         <template #header>
             <div>
                 <NuxtLink to="/">
-                    <NuxtImg class="h-12" :src="logoSrc" alt="logo" format="webp" placeholder preload loading="lazy" />
+                    <img class="h-12" :src="logo" alt="logo" />
                 </NuxtLink>
             </div>
         </template>
@@ -20,23 +20,19 @@
 </template>
 
 <script>
+import logo from '@/assets/image/logo.png';
 export default {
     data() {
         return {
             position: 'top',
             visible: false,
             search: null,
-            isLogo: false,
+            logo: logo
         }
     },
     watch: {
         '$route'(to, from) {
             this.visible = false;
-        }
-    },
-    computed: {
-        logoSrc() {
-            return this.isLogo ? '/logo_white.png' : '/logo.png';
         }
     },
     methods: {

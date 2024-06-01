@@ -61,17 +61,15 @@ export default defineNuxtConfig({
   ],
   modules: [
     'nuxt-primevue',
-    '@nuxt/image',
     '@unlok-co/nuxt-stripe',
     '@ant-design-vue/nuxt',
     'nuxt-swiper',
     '@nuxtjs/supabase',
     '@nuxtjs/turnstile',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode',
     'nuxt-security',
     'nuxt-time',
-    "@nuxtjs/seo"
+    "@nuxtjs/seo",
   ],
   security: {
     rateLimiter: {
@@ -87,7 +85,7 @@ export default defineNuxtConfig({
     headers: {
       crossOriginEmbedderPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'require-corp',
       contentSecurityPolicy: false,
-
+      crossOriginEmbedderPolicy: false,
     },
   },
   supabase: {
@@ -133,16 +131,6 @@ export default defineNuxtConfig({
         'Textarea'
       ]
     }
-  },
-  image: {
-    provider: "ipx",
-    format: ['webp'],
-    formats: {
-      webp: {
-        quality: 50
-      }
-    },
-    dir: './assets/image',
   },
   stripe: {
     server: {

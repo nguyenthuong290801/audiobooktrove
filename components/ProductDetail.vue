@@ -5,7 +5,7 @@
                 <div class="flex flex-col justify-center gap-2 relative">
                     <div class="rounded-md w-40 h-40 lg:w-60 lg:h-60 shadow overflow-hidden card_box_detail"
                         :style="promotionStyle(product)">
-                        <NuxtImg :src="product.image" class="w-full h-full object-cover" :alt="product.name" />
+                        <img :src="product.image" class="w-full h-full object-cover" :alt="product.name" />
                     </div>
                     <Button :disabled="isLoad[product.audio_object_key]"
                         @click.prevent="toggleAudio(product.audio_object_key)"
@@ -250,7 +250,7 @@ export default {
                             'Csrf-Token': csrfToken,
                         },
                     })
-                    if (cartResponse) {
+                    if (cartResponse.data) {
                         const cart = JSON.parse(cartResponse.data);
                         cart.forEach(item => {
                             this.addCart[item.id] = true;

@@ -20,7 +20,7 @@
                                     <NuxtLink :to="'/audiobooks/' + handleSlug(product.name)"
                                         class="rounded-md w-40 h-40 overflow-hidden shadow card_box"
                                         :style="promotionStyle(product)">
-                                        <NuxtImg :src="product.image" class="w-full object-cover" :alt="product.name" format="webp" placeholder preload loading="lazy" />
+                                        <img :src="product.image" class="w-full object-cover" :alt="product.name" />
                                     </NuxtLink>
                                 </div>
                                 <div>

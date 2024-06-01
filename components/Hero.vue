@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-hero bg-cover bg-center flex items-center" :style="{ backgroundImage: `url(${hero.background})` }">
+  <div class="bg-hero bg-cover bg-center flex items-center" :style="{ backgroundImage: `url(${bg})` }">
     <div class="max-w-6xl px-2 lg:px-0 mx-auto basis-full mt-5 z-10">
       <div class="flex flex-wrap items-center">
         <div class="basis-full lg:basis-7/12">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="basis-full flex justify-center lg:basis-5/12 mt-3">
-          <NuxtImg format="webp" placeholder preload loading="lazy" class="w-full shadow-img" :src="hero.image" alt="hero" />
+          <img class="w-full shadow-img" :src="heroImg" alt="hero" />
         </div>
       </div>
     </div>
@@ -35,7 +35,15 @@
 </template>
 
 <script>
+import bg from '@/assets/image/bg.jpg';
+import hero from '@/assets/image/hero.png';
 export default {
+  data() {
+    return {
+      bg: bg,
+      heroImg: hero,
+    }
+  },
   props: {
     hero: {
       type: Object,
